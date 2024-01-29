@@ -1,4 +1,4 @@
-package factorymethod;
+package Week1;
 
 public class Opettaja extends AterioivaOtus {
 
