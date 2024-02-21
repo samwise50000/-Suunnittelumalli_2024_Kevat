@@ -15,3 +15,4 @@ public class Main {
         chess.playOneGame(2);
     }
 }
+
