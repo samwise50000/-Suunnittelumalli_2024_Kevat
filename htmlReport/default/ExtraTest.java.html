@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExtraTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">All in Week2 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">ExtraTest.java</span></div><h1>ExtraTest.java</h1><pre class="source lang-java linenums">import Week4_Build_Jacoco.Laskin;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+<span class="fc" id="L11">public class ExtraTest extends AbstractParent {</span>
+
+    private static Laskin laskin;
+<span class="fc" id="L14">    private final double DELTA = 0.001;</span>
+
+    @BeforeAll
+    public static void setUp() {
+<span class="fc" id="L18">        System.out.println(&quot;@BeforeAll Virta ON (ennen ensimmäistä testiä)&quot;);</span>
+<span class="fc" id="L19">        laskin = new Laskin();</span>
+<span class="fc" id="L20">        laskin.virtaON();</span>
+<span class="fc" id="L21">    }</span>
+
+    @AfterAll
+    public static void tearDown() {
+<span class="fc" id="L25">        System.out.println(&quot;@AfterAll Virta OFF (kaikki testit ajettu).&quot;);</span>
+<span class="fc" id="L26">        laskin.virtaOFF();</span>
+<span class="fc" id="L27">        laskin = null;</span>
+<span class="fc" id="L28">    }</span>
+
+    @BeforeEach
+    public void beforeEachTest() {
+<span class="fc" id="L32">        System.out.println(&quot;  Nollaa laskin.&quot;);</span>
+<span class="fc" id="L33">        laskin.nollaa();</span>
+<span class="fc" id="L34">        assertEquals(0, laskin.annaTulos(), &quot;Nollaus ei onnistunut&quot;);</span>
+<span class="fc" id="L35">    }</span>
+
+    @Test
+    public void testNelio2() {
+<span class="fc" id="L39">        laskin.nelio(2);</span>
+<span class="fc" id="L40">        assertEquals(4, laskin.annaTulos(), &quot;Luvun 2 neliöön korotus väärin&quot;);</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test
+    public void testNelio4() {
+<span class="fc" id="L45">        laskin.nelio(4);</span>
+<span class="fc" id="L46">        assertEquals(16, laskin.annaTulos(), &quot;Luvun 4 neliöön korotus väärin&quot;);</span>
+<span class="fc" id="L47">    }</span>
+
+    @Test
+    public void testNelio5() {
+<span class="fc" id="L51">        laskin.nelio(5);</span>
+<span class="fc" id="L52">        assertEquals(25, laskin.annaTulos(), DELTA, &quot;Luvun 5 neliöön korotus väärin&quot;);</span>
+<span class="fc" id="L53">    }</span>
+
+    @Test
+    public void testNeliojuuri2() {
+<span class="fc" id="L57">        laskin.neliojuuri(2);</span>
+<span class="fc" id="L58">        assertEquals((int) Math.sqrt(2), laskin.annaTulos(), DELTA, &quot;Luvun 2 neliöjuuri väärin&quot;);</span>
+<span class="fc" id="L59">    }</span>
+
+    @Test
+    @DisplayName(&quot;Testaa negatiivinen neliöjuuri&quot;)
+    public void testNeliojuuriNegat() {
+<span class="fc" id="L64">        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -&gt; {</span>
+<span class="nc" id="L65">            laskin.neliojuuri(-2);</span>
+<span class="nc" id="L66">        });</span>
+
+<span class="fc" id="L68">        String expectedMessage = &quot;Negatiiviselle luvulle ei voi laskea neliöjuurta&quot;;</span>
+<span class="fc" id="L69">        String actualMessage = exception.getMessage();</span>
+
+<span class="fc" id="L71">        assertTrue(actualMessage.contains(expectedMessage), &quot;Virheviesti ei vastaa odotettua viestiä&quot;);</span>
+<span class="fc" id="L72">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

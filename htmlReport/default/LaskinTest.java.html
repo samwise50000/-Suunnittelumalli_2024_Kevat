@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fi"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LaskinTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">All in Week2 Coverage Results</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">LaskinTest.java</span></div><h1>LaskinTest.java</h1><pre class="source lang-java linenums">import Week4_Build_Jacoco.Laskin;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
+<span class="fc" id="L11">public class LaskinTest {</span>
+
+    private Laskin laskin;
+<span class="fc" id="L14">    private final double DELTA = 0.001;</span>
+
+    @BeforeEach
+    public void setUp() {
+<span class="fc" id="L18">        laskin = new Laskin();</span>
+<span class="fc" id="L19">    }</span>
+
+    @Test
+    public void testLisaa() {
+<span class="fc" id="L23">        laskin.lisaa(1);</span>
+<span class="fc" id="L24">        laskin.lisaa(2);</span>
+<span class="fc" id="L25">        assertEquals(3, laskin.annaTulos(), DELTA, &quot;Lukujen 1 ja 2 summa väärin&quot;);</span>
+<span class="fc" id="L26">    }</span>
+
+    @Test
+    public void testVahenna() {
+<span class="fc" id="L30">        laskin.lisaa(10);</span>
+<span class="fc" id="L31">        laskin.vahenna(2);</span>
+<span class="fc" id="L32">        assertEquals(8, laskin.annaTulos(), DELTA, &quot;Lukujen 10 ja 2 erotus väärin&quot;);</span>
+<span class="fc" id="L33">    }</span>
+
+    @Test
+    @DisplayName(&quot;Testaa jakolasku 8 / 2&quot;)
+    public void testJaa() {
+<span class="fc" id="L38">        laskin.lisaa(8);</span>
+<span class="fc" id="L39">        laskin.jaa(2);</span>
+<span class="fc" id="L40">        assertEquals(4, laskin.annaTulos(), DELTA, &quot;Jakolasku 8/2 väärin&quot;);</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test
+    @DisplayName(&quot;Testaa nollallajako&quot;)
+    public void testJaaNollalla() {
+<span class="pc" id="L46">        ArithmeticException poikkeus = assertThrows(ArithmeticException.class, () -&gt; laskin.jaa(0));</span>
+<span class="fc" id="L47">        assertEquals(&quot;Nollalla ei voi jakaa&quot;, poikkeus.getMessage()); // Päivitetty odotettu virheilmoitus</span>
+<span class="fc" id="L48">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
